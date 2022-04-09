@@ -6,53 +6,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.sql.DataSource;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	// this tells spring to look for H2 database, if we explicitly do not provide data source.
+	// User credentials to authenticate
 	@Autowired
-	DataSource dataSource;
+	UserDetailsService userDetailsService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication()
-				.dataSource(dataSource);
-	}
-
-	protected void configureWithDefaultSchema(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication()
-				.dataSource(dataSource)
-				.withDefaultSchema()
-				.withUser(
-						User.withUsername("user")
-								.password("user")
-								.roles("USER")
-				)
-				.withUser(
-						User.withUsername("admin")
-								.password("admin")
-								.roles("ADMIN")
-				);
-	}
-
-	protected void configureInMemory(AuthenticationManagerBuilder auth) throws Exception {
-		// super.configure(auth);
-
-		// Set your configuration on the auth object
-		auth.inMemoryAuthentication()
-				.withUser("admin")
-				.password("admin")
-				.roles("ADMIN")
-				.and()
-				.withUser("kaushik")
-				.password("kaushik")
-				.roles("USER");
+		auth.userDetailsService(userDetailsService);
 	}
 
 	@Bean
