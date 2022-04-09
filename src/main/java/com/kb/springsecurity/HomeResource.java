@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeResource {
 	@GetMapping(value = "/home")
 	public String home() {
-		return "Hello there!";
+		return "Hello you!";
 	}
 }
