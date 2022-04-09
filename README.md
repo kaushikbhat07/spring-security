@@ -11,3 +11,10 @@ parameter. Manipulate the argument to override authentication configuration.
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
+
+3) Internal working
+
+![img_4.png](img_4.png)
+
+4) JDBC authentication: Override `configure` method and set the data source. Create users and authorities table and
+populate them.
