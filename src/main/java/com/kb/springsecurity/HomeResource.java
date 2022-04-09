@@ -5,8 +5,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeResource {
-	@GetMapping(value = "/home")
+	@GetMapping(value = "/")
 	public String home() {
-		return "Hello you!";
+		return "Hello home!";
+	}
+
+	@GetMapping(value = "/admin")
+	public String admin() {
+		return "Hello admin!";
+	}
+
+	@GetMapping(value = "/user")
+	public String user() {
+		return "Hello user!";
 	}
 }
