@@ -1,4 +1,4 @@
-package com.kb.springsecurity;
+package com.kb.springsecurity.services;
 
 import com.kb.springsecurity.models.MyUserDetails;
 import com.kb.springsecurity.models.User;
@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,6 @@ public class MyUserDetailsService implements UserDetailsService {
 			return new MyUserDetails(user.get());
 
 		throw new UsernameNotFoundException("Not found: " + userName);
+//		return new User("username", "password", new ArrayList<>());
 	}
 }
